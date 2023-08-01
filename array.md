@@ -45,3 +45,35 @@ public int[] result() {
 }
 
 ```
+## 数组滑动窗口
+维护一个窗口，时间复杂度O（N）
+```
+    public void slidingWindow(String originStr, String matchStr) {
+        // 窗口
+        HashMap<Character, Integer> window = new HashMap<>();
+        // 需要匹配的部分
+        HashMap<Character, Integer> need = new HashMap<>();
+        for (char c : matchStr.toCharArray()) {
+            need.put(c, need.getOrDefault(c, 0) + 1);
+        }
+        int left = 0;
+        int right = 0;
+        while (right < originStr.length()) {
+            // 窗口右移
+            char c = originStr.charAt(right);
+            right++;
+            window.put(c, window.getOrDefault(c, 0) + 1);
+            // 窗口数据更新...
+            ...
+            // 什么条件需要缩小窗口？
+            while (left < right && window need shrink) {
+                // 要移出去的字符
+                char d = originStr.charAt(left);
+                left++;
+                window.put(d, window.get(d) - 1);
+                // 窗口数据更新...
+                ...
+            }
+        }
+    }
+```
